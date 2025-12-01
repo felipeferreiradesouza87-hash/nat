@@ -1,1 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta Natalina 💌🎄</title>
+<style>
+  body {
+    background: linear-gradient(135deg, rgba(192,0,0,0.55), rgba(15,138,15,0.55)), url('COLOQUE_LINK_DO_FUNDO_AQUI') center/cover no-repeat fixed;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+  /* ENVELOPE */
+  .envelope-container {
+    cursor: pointer;
+    transition: opacity 0.6s ease;
+  }
+
+  .envelope {
+    width: 260px;
+    height: 180px;
+    position: relative;
+    background: linear-gradient(135deg, #0f8a0f, #c00000);
+    border: 4px solid gold;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    overflow: hidden;
+  }
+
+  .envelope:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, gold 0%, transparent 60%);
+    opacity: 0.25;
+  }
+
+  .envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #c00000, #0f8a0f);
+    border-bottom: 4px solid gold;
+    transform-origin: top;
+    transition: transform 0.8s ease;
+    clip-path: polygon(0 0, 100% 0, 50% 60%);
+    z-index: 3;
+  }
+
+  /* CARTA */
+  .carta {
+    width: 350px;
+    height: 420px;
+    background: #fffdf7;
+    border: 3px solid #c00000;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+    padding: 20px;
+    position: absolute;
+    opacity: 0;
+    transform: translateY(40px) scale(0.8);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .carta.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Fundo decorado com neve */
+  
+  /* Luzes natalinas brilhando nas bordas */
+  .lights {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .light {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: gold;
+    border-radius: 50%;
+    filter: blur(3px);
+    animation: glow 1.6s infinite ease-in-out;
+  }
+
+  @keyframes glow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="envelope-container" onclick="abrirEnvelope()">
+  <div class="envelope" style="background: url('COLOQUE_LINK_DA_IMAGEM_DO_ENVELOPE_AQUI') center/cover no-repeat; border:4px solid gold; border-radius:12px; width:260px; height:180px; position:relative;">
+    <div class="envelope-flap"" id="flap"></div>
+  </div>
+</div>
+
+<div class="carta" id="carta" style="background: url('COLOQUE_LINK_DA_IMAGEM_DA_CARTA_AQUI') center/cover no-repeat;">
+  <!-- Aqui você coloca depois o conteúdo da sua carta -->
+  <h2 style="text-align:center; color:#c00000;">🎄 Minha Carta de Natal 🎁</h2>
+  <p style="font-size:17px;">Aqui vai o texto da sua carta...</p>
+</div>
+
+<script>
+function abrirEnvelope() {
+  const flap = document.getElementById('flap');
+  const envelopeContainer = document.querySelector('.envelope-container');
+  const carta = document.getElementById('carta');
+
+  // Abrir o flap
+  flap.style.transform = 'rotateX(180deg)';
+
+  // Espera o envelope abrir e some com ele
+  setTimeout(() => {
+    envelopeContainer.style.opacity = '0';
+  }, 600);
+
+  // Remove o envelope da tela e mostra a carta
+  setTimeout(() => {
+    envelopeContainer.style.display = 'none';
+    carta.classList.add('show');
+  }, 1100);
+}
+</script>
+
+<div class="lights">
+  <div class="light" style="top: 10px; left: 20%; animation-delay: .2s"></div>
+  <div class="light" style="top: 10px; left: 40%; animation-delay: .8s"></div>
+  <div class="light" style="top: 10px; left: 60%; animation-delay: .4s"></div>
+  <div class="light" style="top: 10px; left: 80%; animation-delay: 1s"></div>
+  <div class="light" style="bottom: 10px; left: 25%; animation-delay: .3s"></div>
+  <div class="light" style="bottom: 10px; left: 50%; animation-delay: .9s"></div>
+  <div class="light" style="bottom: 10px; left: 75%; animation-delay: .5s"></div>
+</div>
+
+  
+<!-- QUADRO PARA COLOCAR UMA FOTO -->
+<div class="foto-quadro">
+  <img src="image/hello_kitty-removebg-preview.png" alt="Foto" />
+</div>
+
+<style>
+  .foto-quadro {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: 320px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 4px solid gold;
+    border-radius: 14px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+    backdrop-filter: blur(4px);
+  }
+
+  .foto-quadro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+</style>
+
+  <!-- Quadro lateral esquerdo -->
+  <div class="photo-frame left-frame">
+    <img src="COLOQUE_LINK_DA_SUA_FOTO_ESQUERDA_AQUI" alt="Foto Esquerda">
+  </div>
+
+</body>
+</html>
 
