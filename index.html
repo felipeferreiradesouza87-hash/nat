@@ -19,44 +19,35 @@
     height: 100vh;
     margin: 0;
     position: relative;
-}
-    position: relative;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+  }
 
-/* ❄️ NEVE CAINDO — ADICIONADO SEM MEXER EM NADA */
-.snow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  overflow: hidden;
-}
+  /* ❄️ NEVE CAINDO */
+  .snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
 
-.snow span {
-  position: absolute;
-  top: -10px;
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.9;
-  animation: fall linear infinite;
-}
+  .snow span {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: fall linear infinite;
+  }
 
-@keyframes fall {
-  0% { transform: translateY(-10vh) translateX(0); }
-  100% { transform: translateY(110vh) translateX(20px); }
-}
+  @keyframes fall {
+    0% { transform: translateY(-10vh) translateX(0); }
+    100% { transform: translateY(110vh) translateX(20px); }
+  }
 
   /* ENVELOPE */
   .envelope-container {
@@ -114,7 +105,6 @@
     transform: translateY(40px) scale(0.8);
     transition: opacity 0.8s ease, transform 0.8s ease;
 
-    /* FONTE BONITA DA CARTA */
     font-family: 'Dancing Script', cursive;
     font-size: 22px;
   }
@@ -149,48 +139,73 @@
     50% { opacity: 1; transform: scale(1.4); }
   }
 
-.fundo-foto {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  overflow: hidden;
-}
+  .fundo-foto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+  }
 
-.fundo-foto img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.75);
-}
+  .fundo-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+  }
 
-</style>
+  /* CORAÇÃO DIREITO */
+  .foto-quadro {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: 320px;
+    background: white;
+    border: 4px solid gold;
+    overflow: hidden;
+    z-index: 10;
+    clip-path: path("M 50 0 C 65 0 80 20 80 40 C 80 80 50 100 50 100 C 50 100 20 80 20 40 C 20 20 35 0 50 0 Z");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-<style>
-.left-frame {
-  position: absolute;
-  top: 50%;
-  left: 5%;
-  transform: translateY(-50%);
-  width: 260px;
-  height: 320px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border: 4px solid gold;
-  border-radius: 14px;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
-  backdrop-filter: blur(4px);
-  z-index: 10;
-}
+  .foto-quadro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: inherit;
+  }
 
-.left-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
+  /* CORAÇÃO ESQUERDO */
+  .left-frame {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: 320px;
+    background: white;
+    border: 4px solid gold;
+    overflow: hidden;
+    z-index: 10;
+    clip-path: path("M 50 0 C 65 0 80 20 80 40 C 80 80 50 100 50 100 C 50 100 20 80 20 40 C 20 20 35 0 50 0 Z");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: inherit;
+  }
+
 </style>
 </head>
 <body>
@@ -232,7 +247,7 @@ function abrirEnvelope() {
   }, 1100);
 }
 
-/* ❄️ SCRIPT DA NEVE — ADICIONADO */
+/* ❄️ SCRIPT DA NEVE */
 document.addEventListener("DOMContentLoaded", () => {
   const snowContainer = document.querySelector(".snow");
 
@@ -261,30 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="foto-quadro">
   <img src="image/hello_kitty-removebg-preview.png" alt="Foto" />
 </div>
-
-<style>
-  .foto-quadro {
-    position: absolute;
-    top: 50%;
-    right: 5%;
-    transform: translateY(-50%);
-    width: 260px;
-    height: 320px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 4px solid gold;
-    border-radius: 14px;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.25);
-    backdrop-filter: blur(4px);
-  }
-
-  .foto-quadro img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-</style>
 
 <div class="photo-frame left-frame">
   <img src="COLOQUE_LINK_DA_SUA_FOTO_ESQUERDA_AQUI" alt="Foto Esquerda">
