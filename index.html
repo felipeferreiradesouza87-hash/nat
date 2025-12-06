@@ -173,8 +173,8 @@
   </div>
 </div>
 
-<div class="carta" id="carta" style="background: url('COLOQUE_LINK_DA_IMAGEM_DA_CARTA_AQUI') center/cover no-repeat;">
-  <!-- Aqui você coloca depois o conteúdo da sua carta -->
+<!-- AQUI É A ÚNICA ALTERAÇÃO: FUNDO BRANCO -->
+<div class="carta" id="carta" style="background:white;">
   <h2 style="text-align:center; color:#c00000;">🎄 Minha Carta de Natal 🎁</h2>
   <p style="font-size:17px;">Aqui vai o texto da sua carta...</p>
 </div>
@@ -185,15 +185,12 @@ function abrirEnvelope() {
   const envelopeContainer = document.querySelector('.envelope-container');
   const carta = document.getElementById('carta');
 
-  // Abrir o flap
   flap.style.transform = 'rotateX(180deg)';
 
-  // Espera o envelope abrir e some com ele
   setTimeout(() => {
     envelopeContainer.style.opacity = '0';
   }, 600);
 
-  // Remove o envelope da tela e mostra a carta
   setTimeout(() => {
     envelopeContainer.style.display = 'none';
     carta.classList.add('show');
@@ -211,7 +208,6 @@ function abrirEnvelope() {
   <div class="light" style="bottom: 10px; left: 75%; animation-delay: .5s"></div>
 </div>
 
-  
 <!-- QUADRO PARA COLOCAR UMA FOTO -->
 <div class="foto-quadro">
   <img src="image/hello_kitty-removebg-preview.png" alt="Foto" />
@@ -241,10 +237,10 @@ function abrirEnvelope() {
   }
 </style>
 
-  <!-- Quadro lateral esquerdo -->
-  <div class="photo-frame left-frame">
-    <img src="COLOQUE_LINK_DA_SUA_FOTO_ESQUERDA_AQUI" alt="Foto Esquerda">
-  </div>
+<!-- Quadro lateral esquerdo -->
+<div class="photo-frame left-frame">
+  <img src="COLOQUE_LINK_DA_SUA_FOTO_ESQUERDA_AQUI" alt="Foto Esquerda">
+</div>
 
 </body>
 </html>
