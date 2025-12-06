@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carta Natalina 💌🎄</title>
+
+<!-- FONTE BONITINHA DA CARTA -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+
 <style>
   body {
     background: url('COLOQUE_LINK_DO_FUNDO_AQUI') center/cover no-repeat fixed;
@@ -81,6 +85,10 @@
     opacity: 0;
     transform: translateY(40px) scale(0.8);
     transition: opacity 0.8s ease, transform 0.8s ease;
+
+    /* FONTE BONITA DA CARTA */
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
   }
 
   .carta.show {
@@ -88,9 +96,6 @@
     transform: translateY(0) scale(1);
   }
 
-  /* Fundo decorado com neve */
-  
-  /* Luzes natalinas brilhando nas bordas */
   .lights {
     position: fixed;
     top: 0;
@@ -162,7 +167,6 @@
 </head>
 <body>
 
-<!-- FUNDO COM FOTO REAL -->
 <div class="fundo-foto">
   <img src="image/happy-holidays-cute-2560x1440-9813.png" alt="Fundo" />
 </div>
@@ -173,10 +177,10 @@
   </div>
 </div>
 
-<!-- AQUI É A ÚNICA ALTERAÇÃO: FUNDO BRANCO -->
+<!-- CARTA COM FONTE BONITA -->
 <div class="carta" id="carta" style="background:white;">
   <h2 style="text-align:center; color:#c00000;">🎄 Minha Carta de Natal 🎁</h2>
-  <p style="font-size:17px;">Aqui vai o texto da sua carta...</p>
+  <p style="font-size:22px;">Aqui vai o texto da sua carta...</p>
 </div>
 
 <script>
@@ -208,7 +212,6 @@ function abrirEnvelope() {
   <div class="light" style="bottom: 10px; left: 75%; animation-delay: .5s"></div>
 </div>
 
-<!-- QUADRO PARA COLOCAR UMA FOTO -->
 <div class="foto-quadro">
   <img src="image/hello_kitty-removebg-preview.png" alt="Foto" />
 </div>
@@ -237,7 +240,6 @@ function abrirEnvelope() {
   }
 </style>
 
-<!-- Quadro lateral esquerdo -->
 <div class="photo-frame left-frame">
   <img src="COLOQUE_LINK_DA_SUA_FOTO_ESQUERDA_AQUI" alt="Foto Esquerda">
 </div>
