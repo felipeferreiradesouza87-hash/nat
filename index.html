@@ -5,34 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carta Natalina 💌🎄</title>
 
-<!-- FONTE BONITINHA DA CARTA -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-  body {
-    background: url('COLOQUE_LINK_DO_FUNDO_AQUI') center/cover no-repeat fixed;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    position: relative;
-  }
-
-/* ❄️ NEVE CAINDO */
-.snow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
+body {
+  background: #000;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
   overflow: hidden;
 }
 
+/* ❄️ NEVE */
+.snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
 .snow span {
   position: absolute;
   top: -10px;
@@ -40,263 +33,194 @@
   height: 8px;
   background: white;
   border-radius: 50%;
-  opacity: 0.9;
+  opacity: 0.8;
   animation: fall linear infinite;
 }
-
 @keyframes fall {
-  0% { transform: translateY(-10vh) translateX(0); }
-  100% { transform: translateY(110vh) translateX(20px); }
+  to { transform: translateY(110vh); }
 }
 
-  /* ENVELOPE */
-  .envelope-container {
-    cursor: pointer;
-    transition: opacity 0.6s ease;
-  }
-
-  .envelope {
-    width: 340px;
-    height: 240px;
-    position: relative;
-    background: linear-gradient(135deg, #0f8a0f, #c00000);
-    border: 4px solid gold;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-    overflow: hidden;
-  }
-
-  .envelope:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom right, gold 0%, transparent 60%);
-    opacity: 0.25;
-  }
-
-  .envelope-flap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #c00000, #0f8a0f);
-    border-bottom: 4px solid gold;
-    transform-origin: top;
-    transition: transform 0.8s ease;
-    clip-path: polygon(0 0, 100% 0, 50% 60%);
-    z-index: 3;
-  }
-
-  /* CARTA */
-  .carta {
-    width: 350px;
-    height: 420px;
-    background: #fffdf7;
-    border: 3px solid #c00000;
-    border-radius: 12px;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.2);
-    padding: 20px;
-    position: absolute;
+/* ❤️ CORAÇÕES FLUTUANDO */
+.hearts span {
+  position: absolute;
+  bottom: -20px;
+  color: #ff4d6d;
+  font-size: 18px;
+  animation: float 8s infinite linear;
+  opacity: .6;
+}
+@keyframes float {
+  to {
+    transform: translateY(-120vh) translateX(40px);
     opacity: 0;
-    transform: translateY(40px) scale(0.8);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    font-family: 'Dancing Script', cursive;
-    font-size: 22px;
   }
-
-  .carta.show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  .lights {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .light {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background: gold;
-    border-radius: 50%;
-    filter: blur(3px);
-    animation: glow 1.6s infinite ease-in-out;
-  }
-
-  @keyframes glow {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.4); }
-  }
-
-.fundo-foto {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  overflow: hidden;
 }
 
-.fundo-foto img {
+/* ✉️ ENVELOPE */
+.envelope-container {
+  cursor: pointer;
+  z-index: 5;
+}
+
+.envelope {
+  width: 260px;
+  height: 180px;
+  background: linear-gradient(135deg, #0f8a0f, #c00000);
+  border: 4px solid gold;
+  border-radius: 14px;
+  position: relative;
+  box-shadow: 0 0 30px gold;
+  animation: glowEnvelope 2s infinite alternate;
+}
+@keyframes glowEnvelope {
+  from { box-shadow: 0 0 15px gold; }
+  to { box-shadow: 0 0 40px gold; }
+}
+
+/* 🎀 LAÇO */
+.envelope::after {
+  content: "🎀";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+}
+
+/* ABA */
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #c00000, #0f8a0f);
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  transform-origin: top;
+  transition: transform .8s ease;
+}
+
+/* 💌 CARTA */
+.carta {
+  width: 360px;
+  height: 440px;
+  background: #fffdf7;
+  border: 4px dashed #c00000;
+  border-radius: 18px;
+  padding: 20px;
+  position: absolute;
+  opacity: 0;
+  transform: scale(.8) translateY(40px);
+  transition: .8s;
+  font-family: 'Dancing Script', cursive;
+  font-size: 22px;
+  box-shadow: 0 0 40px rgba(255,215,0,.8);
+}
+.carta.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.carta h2 {
+  text-align: center;
+  color: #c00000;
+}
+
+/* ✨ BORDA ANIMADA */
+.carta::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 22px;
+  background: linear-gradient(45deg, gold, red, gold);
+  z-index: -1;
+  animation: borderGlow 3s linear infinite;
+}
+@keyframes borderGlow {
+  to { filter: hue-rotate(360deg); }
+}
+
+/* 🖼️ QUADROS */
+.photo-frame {
+  position: absolute;
+  width: 260px;
+  height: 320px;
+  padding: 10px;
+  background: rgba(255,255,255,.85);
+  border: 4px solid gold;
+  border-radius: 18px;
+  box-shadow: 0 0 25px gold;
+}
+.photo-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.75);
-}
-
-/* 💖 MOLDURAS DE CORAÇÃO */
-.heart-frame {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 280px;
-  height: 280px;
-  z-index: 10;
+  border-radius: 14px;
 }
 
 .left-frame {
   left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .right-frame {
   right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
 }
-
-.heart-frame::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 100%;
-  background: gold;
-  clip-path: path('M140,30 C115,10 85,10 65,30 C45,50 45,75 65,100 L140,175 L215,100 C235,75 235,50 215,30 C195,10 165,10 140,30 Z');
-  filter: drop-shadow(0 8px 20px rgba(255, 215, 0, 0.4));
-}
-
-.heart-frame::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 8px);
-  height: calc(100% - 8px);
-  background: white;
-  clip-path: path('M140,32 C117,14 89,14 70,32 C51,50 51,73 70,96 L140,166 L210,96 C229,73 229,50 210,32 C191,14 163,14 140,32 Z');
-  z-index: 1;
-}
-
-.heart-frame img {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 16px);
-  height: calc(100% - 16px);
-  object-fit: cover;
-  clip-path: path('M140,34 C119,18 93,18 75,34 C57,50 57,71 75,92 L140,157 L205,92 C223,71 223,50 205,34 C187,18 161,18 140,34 Z');
-  z-index: 2;
-}
-
-@keyframes heartbeat {
-  0%, 100% { transform: translateY(-50%) scale(1); }
-  10% { transform: translateY(-50%) scale(1.05); }
-  20% { transform: translateY(-50%) scale(1); }
-}
-
-.heart-frame:hover {
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
 </style>
 </head>
+
 <body>
 
-<!-- ❄️ NEVE CAINDO -->
 <div class="snow"></div>
-
-<div class="fundo-foto">
-  <img src="image/happy-holidays-cute-2560x1440-9813.png" alt="Fundo" />
-</div>
+<div class="hearts"></div>
 
 <div class="envelope-container" onclick="abrirEnvelope()">
-  <div class="envelope" style="background: url('COLOQUE_LINK_DA_IMAGEM_DO_ENVELOPE_AQUI') center/cover no-repeat; border:4px solid gold; border-radius:12px; width:260px; height:180px; position:relative;">
+  <div class="envelope">
     <div class="envelope-flap" id="flap"></div>
   </div>
 </div>
 
-<!-- CARTA COM FONTE BONITA -->
-<div class="carta" id="carta" style="background:white;">
-  <h2 style="text-align:center; color:#c00000;">🎄 Minha Carta de Natal 🎁</h2>
-  <p style="font-size:22px;">Aqui vai o texto da sua carta...</p>
+<div class="carta" id="carta">
+  <h2>🎄 Minha Carta de Natal 🎁</h2>
+  <p>
+    Que este Natal traga amor, paz e muitos sorrisos.  
+    Obrigado por fazer parte da minha história ❤️
+  </p>
 </div>
 
-<!-- 💖 MOLDURA CORAÇÃO ESQUERDA -->
-<div class="heart-frame left-frame">
-  <img src="COLOQUE_LINK_DA_SUA_FOTO_ESQUERDA_AQUI" alt="Foto Esquerda">
+<div class="photo-frame left-frame">
+  <img src="COLOQUE_FOTO_ESQUERDA">
 </div>
 
-<!-- 💖 MOLDURA CORAÇÃO DIREITA -->
-<div class="heart-frame right-frame">
-  <img src="image/hello_kitty-removebg-preview.png" alt="Foto Direita">
+<div class="photo-frame right-frame">
+  <img src="COLOQUE_FOTO_DIREITA">
 </div>
 
 <script>
 function abrirEnvelope() {
-  const flap = document.getElementById('flap');
-  const envelopeContainer = document.querySelector('.envelope-container');
-  const carta = document.getElementById('carta');
-
-  flap.style.transform = 'rotateX(180deg)';
-
-  setTimeout(() => {
-    envelopeContainer.style.opacity = '0';
-  }, 600);
-
-  setTimeout(() => {
-    envelopeContainer.style.display = 'none';
-    carta.classList.add('show');
-  }, 1100);
+  document.getElementById("flap").style.transform = "rotateX(180deg)";
+  document.querySelector(".envelope-container").style.display = "none";
+  document.getElementById("carta").classList.add("show");
 }
 
-/* ❄️ SCRIPT DA NEVE */
-document.addEventListener("DOMContentLoaded", () => {
-  const snowContainer = document.querySelector(".snow");
+/* ❄️ NEVE */
+const snow = document.querySelector(".snow");
+for(let i=0;i<80;i++){
+  const s=document.createElement("span");
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=4+Math.random()*6+"s";
+  snow.appendChild(s);
+}
 
-  for (let i = 0; i < 80; i++) {
-    const floco = document.createElement("span");
-    floco.style.left = Math.random() * 100 + "vw";
-    floco.style.animationDuration = 4 + Math.random() * 6 + "s";
-    floco.style.animationDelay = Math.random() * 5 + "s";
-    floco.style.opacity = Math.random();
-
-    snowContainer.appendChild(floco);
-  }
-});
+/* ❤️ CORAÇÕES */
+const hearts=document.querySelector(".hearts");
+for(let i=0;i<25;i++){
+  const h=document.createElement("span");
+  h.innerText="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=6+Math.random()*6+"s";
+  hearts.appendChild(h);
+}
 </script>
-
-<div class="lights">
-  <div class="light" style="top: 10px; left: 20%; animation-delay: .2s"></div>
-  <div class="light" style="top: 10px; left: 40%; animation-delay: .8s"></div>
-  <div class="light" style="top: 10px; left: 60%; animation-delay: .4s"></div>
-  <div class="light" style="top: 10px; left: 80%; animation-delay: 1s"></div>
-  <div class="light" style="bottom: 10px; left: 25%; animation-delay: .3s"></div>
-  <div class="light" style="bottom: 10px; left: 50%; animation-delay: .9s"></div>
-  <div class="light" style="bottom: 10px; left: 75%; animation-delay: .5s"></div>
-</div>
 
 </body>
 </html>
