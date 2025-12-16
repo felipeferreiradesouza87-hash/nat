@@ -19,18 +19,9 @@
     height: 100vh;
     margin: 0;
     position: relative;
-}
-    position: relative;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+  }
 
-/* ❄️ NEVE CAINDO — ADICIONADO SEM MEXER EM NADA */
+/* ❄️ NEVE CAINDO */
 .snow {
   position: fixed;
   top: 0;
@@ -113,8 +104,6 @@
     opacity: 0;
     transform: translateY(40px) scale(0.8);
     transition: opacity 0.8s ease, transform 0.8s ease;
-
-    /* FONTE BONITA DA CARTA */
     font-family: 'Dancing Script', cursive;
     font-size: 22px;
   }
@@ -166,31 +155,72 @@
   filter: brightness(0.75);
 }
 
-</style>
-
-<style>
-.left-frame {
+/* 💖 MOLDURAS DE CORAÇÃO */
+.heart-frame {
   position: absolute;
   top: 50%;
-  left: 5%;
   transform: translateY(-50%);
-  width: 260px;
-  height: 320px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border: 4px solid gold;
-  border-radius: 14px;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
-  backdrop-filter: blur(4px);
+  width: 280px;
+  height: 280px;
   z-index: 10;
 }
 
-.left-frame img {
+.left-frame {
+  left: 5%;
+}
+
+.right-frame {
+  right: 5%;
+}
+
+.heart-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+  background: gold;
+  clip-path: path('M140,30 C115,10 85,10 65,30 C45,50 45,75 65,100 L140,175 L215,100 C235,75 235,50 215,30 C195,10 165,10 140,30 Z');
+  filter: drop-shadow(0 8px 20px rgba(255, 215, 0, 0.4));
 }
+
+.heart-frame::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  background: white;
+  clip-path: path('M140,32 C117,14 89,14 70,32 C51,50 51,73 70,96 L140,166 L210,96 C229,73 229,50 210,32 C191,14 163,14 140,32 Z');
+  z-index: 1;
+}
+
+.heart-frame img {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  object-fit: cover;
+  clip-path: path('M140,34 C119,18 93,18 75,34 C57,50 57,71 75,92 L140,157 L205,92 C223,71 223,50 205,34 C187,18 161,18 140,34 Z');
+  z-index: 2;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  10% { transform: translateY(-50%) scale(1.05); }
+  20% { transform: translateY(-50%) scale(1); }
+}
+
+.heart-frame:hover {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
 </style>
 </head>
 <body>
@@ -204,7 +234,7 @@
 
 <div class="envelope-container" onclick="abrirEnvelope()">
   <div class="envelope" style="background: url('COLOQUE_LINK_DA_IMAGEM_DO_ENVELOPE_AQUI') center/cover no-repeat; border:4px solid gold; border-radius:12px; width:260px; height:180px; position:relative;">
-    <div class="envelope-flap"" id="flap"></div>
+    <div class="envelope-flap" id="flap"></div>
   </div>
 </div>
 
@@ -212,6 +242,16 @@
 <div class="carta" id="carta" style="background:white;">
   <h2 style="text-align:center; color:#c00000;">🎄 Minha Carta de Natal 🎁</h2>
   <p style="font-size:22px;">Aqui vai o texto da sua carta...</p>
+</div>
+
+<!-- 💖 MOLDURA CORAÇÃO ESQUERDA -->
+<div class="heart-frame left-frame">
+  <img src="COLOQUE_LINK_DA_SUA_FOTO_ESQUERDA_AQUI" alt="Foto Esquerda">
+</div>
+
+<!-- 💖 MOLDURA CORAÇÃO DIREITA -->
+<div class="heart-frame right-frame">
+  <img src="image/hello_kitty-removebg-preview.png" alt="Foto Direita">
 </div>
 
 <script>
@@ -232,7 +272,7 @@ function abrirEnvelope() {
   }, 1100);
 }
 
-/* ❄️ SCRIPT DA NEVE — ADICIONADO */
+/* ❄️ SCRIPT DA NEVE */
 document.addEventListener("DOMContentLoaded", () => {
   const snowContainer = document.querySelector(".snow");
 
@@ -256,38 +296,6 @@ document.addEventListener("DOMContentLoaded", () => {
   <div class="light" style="bottom: 10px; left: 25%; animation-delay: .3s"></div>
   <div class="light" style="bottom: 10px; left: 50%; animation-delay: .9s"></div>
   <div class="light" style="bottom: 10px; left: 75%; animation-delay: .5s"></div>
-</div>
-
-<div class="foto-quadro">
-  <img src="image/hello_kitty-removebg-preview.png" alt="Foto" />
-</div>
-
-<style>
-  .foto-quadro {
-    position: absolute;
-    top: 50%;
-    right: 5%;
-    transform: translateY(-50%);
-    width: 260px;
-    height: 320px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 4px solid gold;
-    border-radius: 14px;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.25);
-    backdrop-filter: blur(4px);
-  }
-
-  .foto-quadro img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-</style>
-
-<div class="photo-frame left-frame">
-  <img src="COLOQUE_LINK_DA_SUA_FOTO_ESQUERDA_AQUI" alt="Foto Esquerda">
 </div>
 
 </body>
