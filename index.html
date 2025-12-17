@@ -1,312 +1,128 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta Natalina 💌🎄</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Kitty Happy Holidays - Cartão Interativo</title>
+    <style>
+        /* Estilos Globais */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f7e6e8; /* Fundo do site, similar ao cartão */
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+        /* Container Principal: Define a área do Cartão */
+        .card-container {
+            width: 800px; /* Largura do seu cartão */
+            height: 500px; /* Altura do seu cartão */
+            position: relative;
+            /* **IMPORTANTE: SUBSTITUA ESTA URL PELA SUA IMAGEM** */
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Hello_Kitty_-_Happy_Holidays.jpg/1280px-Hello_Kitty_-_Happy_Holidays.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden; /* Garante que elementos não vazem */
+        }
 
-<style>
-/* 🌄 FUNDO VERMELHO VINHO */
-body {
-  margin: 0;
-  height: 100vh;
-  background-color: #800020; /* vermelho vinho */
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
+        /* Estilo do Envelope Fechado (Simulando o desenho preto na imagem) */
+        .envelope {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* Ajuste o 'top' para alinhar perfeitamente sobre a Kitty no seu site */
+            transform: translate(-50%, -50%); 
+            width: 180px; /* Ajuste o tamanho para cobrir o envelope na sua imagem */
+            height: 120px;
+            background-color: transparent;
+            /* O desenho do envelope é feito pelas bordas */
+            border: 5px solid black; 
+            box-sizing: border-box;
+            cursor: pointer;
+            z-index: 10;
+            transition: opacity 0.5s, transform 0.5s;
+        }
 
-/* ❄️ NEVE */
-.snow span {
-  position: fixed;
-  top: -10px;
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  animation: snow 6s linear infinite;
-}
-@keyframes snow {
-  to { transform: translateY(110vh); }
-}
+        /* Cria o 'V' do envelope (A parte superior que se move) */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: -5px; /* Compensa a borda */
+            left: -5px;
+            width: calc(100% + 10px);
+            height: 100%;
+            border: 5px solid black;
+            border-bottom: none;
+            /* Desenha o 'V' superior */
+            clip-path: polygon(0 0, 50% 50%, 100% 0); 
+            background-color: transparent;
+            transition: transform 0.5s;
+        }
 
-/* ✨ ESTRELAS */
-.stars span {
-  position: fixed;
-  color: gold;
-  font-size: 14px;
-  animation: twinkle 3s infinite;
-}
-@keyframes twinkle {
-  50% { opacity: 1; transform: scale(1.5); }
-}
+        /* Estilo da Carta (Inicialmente escondida) */
+        .letter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            opacity: 0; /* Escondido */
+            transition: opacity 0.8s ease-in-out;
+            z-index: 5; /* Fica por baixo do envelope fechado */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* ❤️ CORAÇÕES */
-.hearts span {
-  position: fixed;
-  bottom: -20px;
-  color: #ff4d6d;
-  animation: float 8s linear infinite;
-}
-@keyframes float {
-  to { transform: translateY(-120vh); opacity: 0; }
-}
+        /* Estilos do 'Aberto' - quando a classe 'open' é ativada */
+        .card-container.open .envelope {
+            opacity: 0; /* O envelope some */
+            pointer-events: none; /* Desativa cliques no envelope */
+        }
 
-/* 🎁 PRESENTES */
-.presentes span {
-  position: fixed;
-  bottom: -30px;
-  font-size: 26px;
-  animation: subir 10s linear infinite;
-}
-@keyframes subir {
-  to { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
-}
+        .card-container.open .envelope::before {
+             /* O 'V' superior se move para cima */
+            transform: translateY(-100px); 
+        }
 
-/* ✨ LUZES DE NATAL */
-.luzes-natal {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 18px;
-  z-index: 50;
-}
-.luzes-natal span {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  animation: piscar 1.5s infinite alternate;
-}
-.luzes-natal span:nth-child(1){background:red}
-.luzes-natal span:nth-child(2){background:gold;animation-delay:.3s}
-.luzes-natal span:nth-child(3){background:lime;animation-delay:.6s}
-.luzes-natal span:nth-child(4){background:deepskyblue;animation-delay:.9s}
-.luzes-natal span:nth-child(5){background:violet;animation-delay:1.2s}
-
-@keyframes piscar {
-  to { box-shadow: 0 0 12px currentColor; }
-}
-
-/* 🎄 ÁRVORE */
-.arvore {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  font-size: 70px;
-  animation: balanco 3s infinite ease-in-out;
-}
-@keyframes balanco {
-  50% { transform: rotate(5deg); }
-}
-
-/* ✉️ ENVELOPE */
-.envelope-container {
-  cursor: pointer;
-  z-index: 10;
-}
-.envelope {
-  width: 260px;
-  height: 180px;
-  background: linear-gradient(135deg,#0f8a0f,#c00000);
-  border: 4px solid gold;
-  border-radius: 14px;
-  position: relative;
-  box-shadow: 0 0 40px gold;
-  animation: glow 2s infinite alternate;
-}
-@keyframes glow {
-  to { box-shadow: 0 0 65px gold; }
-}
-
-/* 🎀 LAÇO */
-.envelope::before {
-  content:"🎀";
-  position:absolute;
-  top:-28px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:42px;
-}
-
-/* 🎁 SELO */
-.selo {
-  position:absolute;
-  bottom:10px;
-  right:10px;
-  width:60px;
-  height:60px;
-  background:crimson;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:gold;
-  font-size:26px;
-  animation:pulse 1.5s infinite;
-}
-@keyframes pulse {
-  50% { transform: scale(1.15); }
-}
-
-/* ABA */
-.envelope-flap {
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,#c00000,#0f8a0f);
-  clip-path:polygon(0 0,100% 0,50% 60%);
-  transform-origin:top;
-  transition:.8s;
-}
-
-/* 💌 CARTA */
-.carta {
-  width:360px;
-  height:440px;
-  background:#fffdf7;
-  border-radius:18px;
-  padding:22px;
-  position:absolute;
-  opacity:0;
-  transform:scale(.8) translateY(40px);
-  transition:.8s;
-  font-family:'Dancing Script', cursive;
-  font-size:22px;
-  box-shadow:0 0 40px gold;
-}
-.carta.show {
-  opacity:1;
-  transform:scale(1);
-  animation: floatCarta 4s infinite ease-in-out;
-}
-@keyframes floatCarta {
-  50% { transform: translateY(-10px); }
-}
-
-/* ✨ BORDA + AURA */
-.carta::before {
-  content:"";
-  position:absolute;
-  inset:-6px;
-  border-radius:22px;
-  background:linear-gradient(45deg,gold,red,gold);
-  z-index:-1;
-  animation:hue 4s linear infinite;
-}
-@keyframes hue {
-  to { filter:hue-rotate(360deg); }
-}
-.carta::after {
-  content:"";
-  position:absolute;
-  inset:-18px;
-  background:radial-gradient(circle,rgba(255,215,0,.4),transparent 70%);
-  z-index:-2;
-}
-
-/* 🖼️ FOTOS */
-.photo {
-  position:absolute;
-  width:260px;
-  height:320px;
-  padding:10px;
-  background:rgba(255,255,255,.85);
-  border:4px solid gold;
-  border-radius:18px;
-  box-shadow:0 0 25px gold;
-}
-.photo img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:14px;
-}
-.photo::after {
-  content:"";
-  position:absolute;
-  inset:-8px;
-  border-radius:20px;
-  background:linear-gradient(45deg,pink,gold,pink);
-  z-index:-1;
-  animation:hue 3s linear infinite;
-}
-.left { left:5%; }
-.right { right:5%; }
-
-/* ✍️ TEXTO DIGITANDO */
-.carta p {
-  overflow:hidden;
-  white-space:nowrap;
-  border-right:2px solid #c00000;
-  animation: escrever 5s steps(40,end), pisca .7s infinite;
-}
-@keyframes escrever {
-  from { width:0; }
-  to { width:100%; }
-}
-@keyframes pisca {
-  50% { border-color:transparent; }
-}
-</style>
+        .card-container.open .letter {
+            opacity: 1; /* A carta aparece */
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="luzes-natal"><span></span><span></span><span></span><span></span><span></span></div>
-<div class="arvore">🎄</div>
-<div class="snow"></div>
-<div class="stars"></div>
-<div class="hearts"></div>
-<div class="presentes"></div>
-
-<div class="envelope-container" onclick="abrirEnvelope()">
-  <div class="envelope">
-    <div class="envelope-flap" id="flap"></div>
-    <div class="selo">🎄</div>
-  </div>
-</div>
-
-<div class="carta" id="carta">
-  <h2 style="text-align:center;color:#c00000;">🎄 Minha Carta de Natal 🎁</h2>
-  <p>Que este Natal seja cheio de amor e momentos inesquecíveis ❤️</p>
-</div>
-
-<div class="photo left">
-  <img src="COLOQUE_SUA_FOTO_ESQUERDA">
-</div>
-
-<div class="photo right">
-  <img src="COLOQUE_SUA_FOTO_DIREITA">
+<div class="card-container" id="holidayCard">
+    <div class="envelope"></div>
+    <div class="letter">
+        <h3>🎉 Boas Festas! 🎉</h3>
+        <p>Que o seu final de ano seja repleto de alegria, paz e muito chocolate! Esperamos que esta mensagem lhe traga um sorriso.</p>
+        <p style="font-style: italic;">Com todo o carinho,</p>
+    </div>
 </div>
 
 <script>
-function abrirEnvelope(){
-  document.getElementById("flap").style.transform="rotateX(180deg)";
-  document.querySelector(".envelope-container").style.display="none";
-  document.getElementById("carta").classList.add("show");
-}
+    const container = document.getElementById('holidayCard');
+    const envelope = document.querySelector('.envelope');
 
-function criar(q,cls,txt){
-  const el=document.querySelector(cls);
-  for(let i=0;i<q;i++){
-    let s=document.createElement("span");
-    if(txt) s.innerText=txt;
-    s.style.left=Math.random()*100+"vw";
-    s.style.top=Math.random()*100+"vh";
-    s.style.animationDuration=4+Math.random()*6+"s";
-    el.appendChild(s);
-  }
-}
+    // Adiciona a classe 'open' no container quando o envelope é clicado
+    envelope.addEventListener('click', () => {
+        container.classList.add('open');
+    });
 
-criar(80,".snow");
-criar(40,".stars","✨");
-criar(25,".hearts","❤️");
-criar(12,".presentes","🎁");
+    // Opcional: Se você quiser que a carta feche ao ser clicada (reverte a animação)
+    document.querySelector('.letter').addEventListener('click', () => {
+         container.classList.remove('open');
+    });
 </script>
 
 </body>
