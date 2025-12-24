@@ -8,84 +8,94 @@
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background-color: #800020;
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+body{
+  margin:0;
+  height:100vh;
+  background:#800020;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
 }
 
-/* EFEITOS */
-.snow span, .stars span, .hearts span, .presentes span {
-  position: fixed;
+/* ❄️ EFEITOS */
+.snow span{
+  position:fixed;
+  top:-10px;
+  width:8px;
+  height:8px;
+  background:white;
+  border-radius:50%;
+  animation:snow 6s linear infinite;
 }
-.snow span {
-  top: -10px;
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  animation: snow 6s linear infinite;
-}
-@keyframes snow { to { transform: translateY(110vh); } }
+@keyframes snow{to{transform:translateY(110vh)}}
 
-.stars span {
-  color: gold;
-  font-size: 14px;
-  animation: twinkle 3s infinite;
+.stars span{
+  position:fixed;
+  color:gold;
+  font-size:14px;
+  animation:twinkle 3s infinite;
 }
-@keyframes twinkle { 50% { transform: scale(1.5); opacity: 1; } }
+@keyframes twinkle{50%{transform:scale(1.5)}}
 
-.hearts span {
-  bottom: -20px;
-  color: #ff4d6d;
-  animation: float 8s linear infinite;
+.hearts span{
+  position:fixed;
+  bottom:-20px;
+  color:#ff4d6d;
+  animation:float 8s linear infinite;
 }
-@keyframes float { to { transform: translateY(-120vh); opacity: 0; } }
+@keyframes float{to{transform:translateY(-120vh);opacity:0}}
 
-.presentes span {
-  bottom: -30px;
-  font-size: 26px;
-  animation: subir 10s linear infinite;
+.presentes span{
+  position:fixed;
+  bottom:-30px;
+  font-size:26px;
+  animation:subir 10s linear infinite;
 }
-@keyframes subir { to { transform: translateY(-120vh) rotate(360deg); opacity: 0; } }
+@keyframes subir{to{transform:translateY(-120vh) rotate(360deg);opacity:0}}
 
-/* LUZES */
-.luzes-natal {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 18px;
+/* ✨ LUZES */
+.luzes-natal{
+  position:fixed;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:18px;
 }
-.luzes-natal span {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  animation: piscar 1.5s infinite alternate;
+.luzes-natal span{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  animation:piscar 1.5s infinite alternate;
 }
 .luzes-natal span:nth-child(1){background:red}
 .luzes-natal span:nth-child(2){background:gold}
 .luzes-natal span:nth-child(3){background:lime}
 .luzes-natal span:nth-child(4){background:deepskyblue}
 .luzes-natal span:nth-child(5){background:violet}
-@keyframes piscar { to { box-shadow: 0 0 12px currentColor; } }
+@keyframes piscar{to{box-shadow:0 0 12px currentColor}}
 
-/* ENVELOPE */
-.envelope {
-  width: 260px;
-  height: 180px;
-  background: linear-gradient(135deg,#0f8a0f,#c00000);
-  border: 4px solid gold;
-  border-radius: 14px;
-  box-shadow: 0 0 40px gold;
+/* ✉️ ENVELOPE (NORMAL) */
+.envelope-container{
+  position:fixed;
+  cursor:pointer;
+  z-index:10;
 }
-.envelope::before {
+.envelope{
+  width:260px;
+  height:180px;
+  background:linear-gradient(135deg,#0f8a0f,#c00000);
+  border:4px solid gold;
+  border-radius:14px;
+  position:relative;
+  box-shadow:0 0 40px gold;
+  animation:glow 2s infinite alternate;
+}
+@keyframes glow{to{box-shadow:0 0 65px gold}}
+
+.envelope::before{
   content:"🎀";
   position:absolute;
   top:-28px;
@@ -93,9 +103,23 @@ body {
   transform:translateX(-50%);
   font-size:42px;
 }
-.envelope-container { cursor: pointer; z-index: 10; }
 
-.envelope-flap {
+.selo{
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  width:60px;
+  height:60px;
+  background:crimson;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:gold;
+  font-size:26px;
+}
+
+.envelope-flap{
   position:absolute;
   inset:0;
   background:linear-gradient(135deg,#c00000,#0f8a0f);
@@ -104,8 +128,8 @@ body {
   transition:.8s;
 }
 
-/* CARTA */
-.carta {
+/* 💌 CARTA */
+.carta{
   width:360px;
   height:440px;
   background:#fffdf7;
@@ -115,29 +139,26 @@ body {
   opacity:0;
   transform:scale(.8);
   transition:.8s;
-  font-family:'Dancing Script', cursive;
+  font-family:'Dancing Script',cursive;
   font-size:22px;
   box-shadow:0 0 40px gold;
 }
-.carta.show {
+.carta.show{
   opacity:1;
   transform:scale(1);
 }
 
-/* TEXTO */
-.carta p {
-  margin: 8px 0;
+.cursor{
+  display:inline-block;
+  width:2px;
+  height:22px;
+  background:#c00000;
+  animation:pisca .7s infinite;
 }
-.cursor {
-  display: inline-block;
-  width: 2px;
-  background: #c00000;
-  animation: pisca .7s infinite;
-}
-@keyframes pisca { 50% { opacity: 0; } }
+@keyframes pisca{50%{opacity:0}}
 
-/* FOTOS */
-.photo {
+/* 🖼️ FOTOS */
+.photo{
   position:absolute;
   width:260px;
   height:320px;
@@ -146,14 +167,14 @@ body {
   border:4px solid gold;
   border-radius:18px;
 }
-.photo img {
+.photo img{
   width:100%;
   height:100%;
   object-fit:cover;
   border-radius:14px;
 }
-.left { left:5%; }
-.right { right:5%; }
+.left{left:5%}
+.right{right:5%}
 </style>
 </head>
 
@@ -168,6 +189,7 @@ body {
 <div class="envelope-container" onclick="abrirEnvelope()">
   <div class="envelope">
     <div class="envelope-flap" id="flap"></div>
+    <div class="selo">🎄</div>
   </div>
 </div>
 
@@ -180,40 +202,35 @@ body {
 <div class="photo right"><img src="image/hello_kitty-removebg-preview.png"></div>
 
 <script>
-const linhas = [
-  "Oii minha gatinha, escrevo essa carta com muito amor e carinho ❤️",
+const linhas=[
+  "Oii minha gatinha, escrevo essa carta com muito amor ❤️",
   "Cada palavra aqui vem direto do meu coração ✨",
-  "Você é uma pessoa muito especial pra mim 💖",
-  "Que esse Natal seja cheio de paz, amor e sorrisos 🎄",
-  "Obrigado por existir na minha vida 💌",
-  "Com todo meu amor, sempre ❤️"
+  "Você é muito especial pra mim 💖",
+  "Que seu Natal seja cheio de alegria 🎄",
+  "Eu te amo 💌"
 ];
 
-let linhaAtual = 0;
-let charAtual = 0;
-const velocidade = 40;
-const container = document.getElementById("texto");
+let l=0,c=0;
+const texto=document.getElementById("texto");
 
-function escreverLinha() {
-  if (linhaAtual >= linhas.length) return;
+function escrever(){
+  if(l>=linhas.length)return;
 
-  if (!container.children[linhaAtual]) {
-    const p = document.createElement("p");
-    p.innerHTML = "<span class='texto'></span><span class='cursor'></span>";
-    container.appendChild(p);
+  if(!texto.children[l]){
+    const p=document.createElement("p");
+    p.innerHTML="<span class='t'></span><span class='cursor'></span>";
+    texto.appendChild(p);
   }
 
-  const spanTexto = container.children[linhaAtual].querySelector(".texto");
-  spanTexto.textContent += linhas[linhaAtual][charAtual];
-  charAtual++;
+  texto.children[l].querySelector(".t").textContent+=linhas[l][c];
+  c++;
 
-  if (charAtual < linhas[linhaAtual].length) {
-    setTimeout(escreverLinha, velocidade);
-  } else {
-    container.children[linhaAtual].querySelector(".cursor").remove();
-    linhaAtual++;
-    charAtual = 0;
-    setTimeout(escreverLinha, 500);
+  if(c<linhas[l].length){
+    setTimeout(escrever,40);
+  }else{
+    texto.children[l].querySelector(".cursor").remove();
+    l++; c=0;
+    setTimeout(escrever,500);
   }
 }
 
@@ -221,16 +238,15 @@ function abrirEnvelope(){
   document.getElementById("flap").style.transform="rotateX(180deg)";
   document.querySelector(".envelope-container").style.display="none";
   document.getElementById("carta").classList.add("show");
-  escreverLinha();
+  escrever();
 }
 
 function criar(q,cls,txt){
   const el=document.querySelector(cls);
   for(let i=0;i<q;i++){
     let s=document.createElement("span");
-    if(txt) s.innerText=txt;
+    if(txt)s.innerText=txt;
     s.style.left=Math.random()*100+"vw";
-    s.style.top=Math.random()*100+"vh";
     s.style.animationDuration=4+Math.random()*6+"s";
     el.appendChild(s);
   }
